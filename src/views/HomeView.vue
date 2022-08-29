@@ -147,7 +147,7 @@ h4
   background: rgba(31, 18, 18, 0.600);
   border: 2px solid white;
   border-radius: 15px;
-  padding: 30px;
+  padding: 20px 30px;
 
 }
 
@@ -189,11 +189,19 @@ h4
   .input
   {
     width: 95%;
+    flex-direction: column-reverse;
   }
 
   .days
   {
     font-size: 12px;
+  }
+  .container {
+    align-items: flex-start;
+    margin-top: 230px;
+  }
+  .wrapper {
+    flex-direction: column-reverse;
   }
 }
 </style>
