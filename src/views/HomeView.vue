@@ -13,6 +13,7 @@
             <div class="days-container">
               <section class="days" v-for="(days, index) in wheaterData.days.slice(0, 7)" :key="index">
                 <h3>{{  getDayOfWeek(days.datetime)  }}</h3>
+                
                 <h4>{{  days.temp  }} °C</h4>
               </section>
             </div>
@@ -43,6 +44,12 @@ export default {
       wheaterFetched: false,
       notFound: false,
       query: '',
+
+      wheaterIcons: [
+        {
+          icon: require('@/assets/Icons/Color')
+        }
+      ]
     }
   },
   methods: {
