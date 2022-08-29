@@ -23,7 +23,9 @@ export default {
     },
 
     created() {
-        if(this.animatedBgToUse == 'partly-cloudy-day') {
+        if(this.animatedBgToUse == 'Partially cloudy' || 
+        this.animatedBgToUse == 'Overcast' || 
+        this.animatedBgToUse == 'Rain') {
             this.background = this.backgrounds[1].bg
         }
         else if(this.animatedBgToUse == 'clear-day') {

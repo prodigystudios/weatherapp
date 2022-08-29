@@ -13,7 +13,7 @@
             <div class="days-container">
               <section class="days" v-for="(days, index) in wheaterData.days.slice(0, 7)" :key="index">
                 <h3>{{  getDayOfWeek(days.datetime)  }}</h3>
-                
+                <img class="icon" :src="getIcon(days.icon)">
                 <h4>{{  days.temp  }} °C</h4>
               </section>
             </div>
@@ -44,11 +44,91 @@ export default {
       wheaterFetched: false,
       notFound: false,
       query: '',
-
       wheaterIcons: [
         {
-          icon: require('@/assets/Icons/Color')
-        }
+          name: 'clear-day',
+          icon: require('@/assets/Icons/Color/clear-day.png')
+        },
+        {
+          name: 'clear-night',
+          icon: require('@/assets/Icons/Color/clear-night.png')
+        },
+        {
+          name: 'cloudy',
+          icon: require('@/assets/Icons/Color/cloudy.png')
+        },
+        {
+          name: 'fog',
+          icon: require('@/assets/Icons/Color/fog.png')
+        },
+        {
+          name: 'hail',
+          icon: require('@/assets/Icons/Color/hail.png')
+        },
+        {
+          name: 'partly-cloudy-day',
+          icon: require('@/assets/Icons/Color/partly-cloudy-day.png')
+        },
+        {
+          name: 'rain-snow-showers-day',
+          icon: require('@/assets/Icons/Color/rain-snow-showers-day.png')
+        },
+        {
+          name: 'rain-snow-showers-night',
+          icon: require('@/assets/Icons/Color/rain-snow-showers-night.png')
+        },
+        {
+          name: 'rain-snow',
+          icon: require('@/assets/Icons/Color/rain-snow.png')
+        },
+        {
+          name: 'rain',
+          icon: require('@/assets/Icons/Color/rain.png')
+        },
+        {
+          name: 'showers-day',
+          icon: require('@/assets/Icons/Color/showers-day.png')
+        },
+        {
+          name: 'showers-night',
+          icon: require('@/assets/Icons/Color/showers-night.png')
+        },
+        {
+          name: 'sleet',
+          icon: require('@/assets/Icons/Color/sleet.png')
+        },
+        {
+          name: 'snow-showers-day',
+          icon: require('@/assets/Icons/Color/snow-showers-day.png')
+        },
+        {
+          name: 'snow-showers-night',
+          icon: require('@/assets/Icons/Color/snow-showers-night.png')
+        },
+        {
+          name: 'snow',
+          icon: require('@/assets/Icons/Color/snow.png')
+        },
+        {
+          name: 'thunder-rain',
+          icon: require('@/assets/Icons/Color/thunder-rain.png')
+        },
+        {
+          name: 'thunder-showers-day',
+          icon: require('@/assets/Icons/Color/thunder-showers-day.png')
+        },
+        {
+          name: 'thunder-showers-night',
+          icon: require('@/assets/Icons/Color/thunder-showers-night.png')
+        },
+        {
+          icon: require('@/assets/Icons/Color/thunder.png')
+        },
+        {
+          name: 'wind',
+          icon: require('@/assets/Icons/Color/wind.png')
+        },
+
       ]
     }
   },
@@ -69,8 +149,9 @@ export default {
           this.wheaterFetched = true;
           this.currentTime = new Date().toLocaleTimeString();
           this.query = '';
-          this.currentWheaterStatus = data.currentConditions.icon;
-          this.updateview++;
+          this.currentWheaterStatus = data.currentConditions.conditions;
+          console.log(this.wheaterData);
+          this.updateview++;       
         })
         .catch(err => {
           this.notFound = true;
@@ -79,11 +160,19 @@ export default {
           console.error(err);
         });
     },
-
     getDayOfWeek(date) {
       const dayOfWeek = new Date(date).getDay();
       return isNaN(dayOfWeek) ? null :
         ['Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag'][dayOfWeek];
+    },
+    getIcon (name) {
+      var singelIcon = '';
+      this.wheaterIcons.forEach(element => {
+      if(element.name == name) {
+        singelIcon = element.icon;
+      }
+      });
+      return singelIcon;
     }
   }
 }
@@ -151,11 +240,11 @@ h4
 
 .wheater-info-container
 {
+  height: auto;
   background: rgba(31, 18, 18, 0.600);
   border: 2px solid white;
   border-radius: 15px;
   padding: 20px 30px;
-
 }
 
 .days-container
@@ -177,6 +266,12 @@ h4
   padding: 10px;
 }
 
+.icons
+{
+  width: 32px;
+  height: 32px;
+}
+
 .fade-enter-active,
 .fade-leave-active
 {
@@ -192,23 +287,35 @@ h4
 
 @media (max-width: 425px)
 {
-
+  html {
+    overflow:scroll;
+  }
   .input
   {
     width: 95%;
-    flex-direction: column-reverse;
+    margin-top:15px;
+    border-radius: 10px;
   }
 
   .days
   {
-    font-size: 12px;
+    font-size: 10px;
   }
-  .container {
-    align-items: flex-start;
-    margin-top: 230px;
+
+  .container
+  {
+    display:flex;
   }
-  .wrapper {
+
+  .wrapper
+  {
     flex-direction: column-reverse;
+    height: auto;
   }
+  .wheater-info-container
+{
+  height: auto;
+  padding: 10px 4px;
+}
 }
 </style>
