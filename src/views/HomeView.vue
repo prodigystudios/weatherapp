@@ -1,4 +1,5 @@
 <template>
+
   <div class="container">
     <transition name="fade">
       <div class="wrapper">
@@ -23,19 +24,25 @@
       </div>
     </transition>
   </div>
+  <animated-bg :key="updateview" :animatedBgToUse="currentWheaterStatus" />
 </template>
 
 <script>
+import AnimatedBg from '@/components/AnimatedBg.vue';
 export default {
+  components: {
+    AnimatedBg,
+  },
   name: 'HomeView',
   data() {
     return {
+      updateview: 0,
       wheaterData: [],
+      currentWheaterStatus: '',
       currentTime: '',
       wheaterFetched: false,
       notFound: false,
       query: '',
-      errorMsg: 'staden du sökte efter finns ej, försök igen!'
     }
   },
   methods: {
@@ -55,7 +62,8 @@ export default {
           this.wheaterFetched = true;
           this.currentTime = new Date().toLocaleTimeString();
           this.query = '';
-          console.log(this.wheaterData)
+          this.currentWheaterStatus = data.currentConditions.icon;
+          this.updateview++;
         })
         .catch(err => {
           this.notFound = true;
@@ -64,6 +72,7 @@ export default {
           console.error(err);
         });
     },
+
     getDayOfWeek(date) {
       const dayOfWeek = new Date(date).getDay();
       return isNaN(dayOfWeek) ? null :
@@ -111,7 +120,6 @@ export default {
 {
   color: lightgray;
 }
-
 
 h1,
 h3,
@@ -178,10 +186,13 @@ h4
 @media (max-width: 425px)
 {
 
-  .input {
+  .input
+  {
     width: 95%;
   }
-  .days {
+
+  .days
+  {
     font-size: 12px;
   }
 }
