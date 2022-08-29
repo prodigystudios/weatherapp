@@ -4,7 +4,7 @@
     <transition name="fade">
       <div class="wrapper">
         <input id="input-field" class="input" v-on:keydown.enter="fetchWeather()" v-model="query" type="text"
-          placeholder="var vill du veta vädret?" required />
+          placeholder="var vill du veta vädret?"/>
         <transition name="fade">
           <div class="wheater-info-container" v-if="wheaterFetched">
             <h1> <span style="text-transform:uppercase">{{  wheaterData.address  }} {{  currentTime  }}</span></h1>
@@ -287,9 +287,6 @@ h4
 
 @media (max-width: 425px)
 {
-  html {
-    overflow:scroll;
-  }
   .input
   {
     width: 95%;

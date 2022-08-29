@@ -56,11 +56,6 @@ source
 @media (max-width: 425px)
 {
 
-    html
-    {
-        overflow: hidden;
-    }
-
     source
     {
         width: 100%;

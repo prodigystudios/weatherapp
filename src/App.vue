@@ -37,4 +37,11 @@ nav a.router-link-exact-active
 {
   color: #42b983;
 }
+
+
+@media (max-width: 425px) {
+  html {
+    overflow: scroll;
+  }
+}
 </style>
