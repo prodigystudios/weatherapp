@@ -129,7 +129,12 @@ export default {
           icon: require('@/assets/Icons/Color/wind.png')
         },
 
-      ]
+      ],
+
+      //geoLocation param
+      longitude: '',
+      latitude: '',
+
     }
   },
   methods: {
@@ -150,7 +155,6 @@ export default {
           this.currentTime = new Date().toLocaleTimeString();
           this.query = '';
           this.currentWheaterStatus = data.currentConditions.conditions;
-          console.log(this.wheaterData);
           this.updateview++;
         })
         .catch(err => {
@@ -175,14 +179,19 @@ export default {
       return singelIcon;
     },
 
-    getLocation() {
-      if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(this.showPosition)
-      }
-    },
-
     showPosition(position) {
-      console.log(position.coords.latitude, position.coords.longitude)
+      fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/' 
+      + position.coords.longitude + ',' + position.coords.latitude + 
+      '.json?types=place%2Cpostcode%2Caddress&limit=1&access_token=pk.eyJ1IjoicHJvZGlneXN0dWRpbyIsImEiOiJjbDdqOTBxdHowYWpjM3hsanpqcnptcG5iIn0.XqDAMh6ptNOUAVND5z4j4w', {
+        "method": "GET",
+        "headers": {
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+        this.query = data.features[0].context[1].text;
+        this.fetchWeather();
+      })
     }
   },
   created() {
@@ -190,7 +199,7 @@ export default {
         navigator.geolocation.getCurrentPosition(this.showPosition)
       }else {
         console.log('cant get position');
-      }   
+      } 
   }
 }
 </script>
@@ -301,36 +310,11 @@ h4
   opacity: 0;
 }
 
-
 @media (max-width: 425px)
 {
-  .input
-  {
-    width: 95%;
-    margin-top: 15px;
-    border-radius: 10px;
-  }
-
-  .days
-  {
-    font-size: 10px;
-  }
-
-  .container
-  {
-    display: flex;
-  }
-
-  .wrapper
-  {
-    flex-direction: column-reverse;
-    height: auto;
-  }
-
-  .wheater-info-container
-  {
-    height: auto;
-    padding: 10px 4px;
+  .days {
+    width: 100%;
+    font-size: 15px;
   }
 }
 </style>

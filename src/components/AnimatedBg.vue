@@ -64,7 +64,7 @@ source
     video
     {
         width: 100%;
-        height: 900px;
+        height: 3500px;
         object-fit: cover;
     }
 }
