@@ -317,4 +317,10 @@ h4
     font-size: 15px;
   }
 }
+
+@media (max-width: 650px) {
+  .days {
+    width: 100%;
+  }
+}
 </style>

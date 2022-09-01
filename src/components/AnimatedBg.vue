@@ -1,5 +1,5 @@
 <template>
-    <video  autoplay loop muted>
+    <video autoplay loop muted>
         <source :src="background">
     </video>
 </template>
@@ -23,12 +23,12 @@ export default {
     },
 
     created() {
-        if(this.animatedBgToUse == 'Partially cloudy' || 
-        this.animatedBgToUse == 'Overcast' || 
-        this.animatedBgToUse == 'Rain') {
+        if (this.animatedBgToUse == 'Partially cloudy' ||
+            this.animatedBgToUse == 'Overcast' ||
+            this.animatedBgToUse == 'Rain') {
             this.background = this.backgrounds[1].bg
         }
-        else if(this.animatedBgToUse == 'clear-day') {
+        else if (this.animatedBgToUse == 'clear-day') {
             this.background = this.backgrounds[0].bg;
         }
     }
@@ -44,13 +44,13 @@ source
 .fade-enter-active,
 .fade-leave-active
 {
-  transition: opacity 1.5s ease;
+    transition: opacity 1.5s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to
 {
-  opacity: 0;
+    opacity: 0;
 }
 
 @media (max-width: 425px)
@@ -65,6 +65,22 @@ source
     {
         width: 100%;
         height: 3500px;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 650px)
+{
+
+    source
+    {
+        width: 100%;
+    }
+
+    video
+    {
+        width: 100%;
+        height: 3000px;
         object-fit: cover;
     }
 }
