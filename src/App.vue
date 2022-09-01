@@ -6,6 +6,7 @@
 html
 {
   overflow: hidden;
+  scroll-behavior: smooth;
 }
 
 body
@@ -26,10 +27,27 @@ body
 @media (max-width: 425px) {
   html {
     overflow:visible;
+    scroll-behavior: smooth;
   }
   #app {
     font-family: fantasy;
     letter-spacing: 5px;
+  }
+}
+
+@media (max-width: 650px) {
+  html {
+    overflow:visible;
+    scroll-behavior: smooth;
+  }
+  #app {
+    font-family: fantasy;
+    letter-spacing: 5px;
+  }
+}
+@media screen and (orientation: landscape) {
+  html {
+    overflow: visible;
   }
 }
 </style>
