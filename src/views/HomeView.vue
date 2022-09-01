@@ -4,17 +4,17 @@
     <transition name="fade">
       <div class="wrapper">
         <input id="input-field" class="input" v-on:keydown.enter="fetchWeather()" v-model="query" type="text"
-          placeholder="var vill du veta vädret?"/>
+          placeholder="var vill du veta vädret?" />
         <transition name="fade">
           <div class="wheater-info-container" v-if="wheaterFetched">
-            <h1> <span style="text-transform:uppercase">{{  wheaterData.address  }} {{  currentTime  }}</span></h1>
-            <h1 class="temp">{{  wheaterData.currentConditions.temp  }} °C</h1>
-            <h1>{{  wheaterData.currentConditions.conditions  }}</h1>
+            <h1> <span style="text-transform:uppercase">{{ wheaterData.address }} {{ currentTime }}</span></h1>
+            <h1 class="temp">{{ wheaterData.currentConditions.temp }} °C</h1>
+            <h1>{{ wheaterData.currentConditions.conditions }}</h1>
             <div class="days-container">
               <section class="days" v-for="(days, index) in wheaterData.days.slice(0, 7)" :key="index">
-                <h3>{{  getDayOfWeek(days.datetime)  }}</h3>
+                <h3>{{ getDayOfWeek(days.datetime) }}</h3>
                 <img class="icon" :src="getIcon(days.icon)">
-                <h4>{{  days.temp  }} °C</h4>
+                <h4>{{ days.temp }} °C</h4>
               </section>
             </div>
           </div>
@@ -151,7 +151,7 @@ export default {
           this.query = '';
           this.currentWheaterStatus = data.currentConditions.conditions;
           console.log(this.wheaterData);
-          this.updateview++;       
+          this.updateview++;
         })
         .catch(err => {
           this.notFound = true;
@@ -165,15 +165,32 @@ export default {
       return isNaN(dayOfWeek) ? null :
         ['Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag'][dayOfWeek];
     },
-    getIcon (name) {
+    getIcon(name) {
       var singelIcon = '';
       this.wheaterIcons.forEach(element => {
-      if(element.name == name) {
-        singelIcon = element.icon;
-      }
+        if (element.name == name) {
+          singelIcon = element.icon;
+        }
       });
       return singelIcon;
+    },
+
+    getLocation() {
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.showPosition)
+      }
+    },
+
+    showPosition(position) {
+      console.log(position.coords.latitude, position.coords.longitude)
     }
+  },
+  created() {
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.showPosition)
+      }else {
+        console.log('cant get position');
+      }   
   }
 }
 </script>
@@ -290,7 +307,7 @@ h4
   .input
   {
     width: 95%;
-    margin-top:15px;
+    margin-top: 15px;
     border-radius: 10px;
   }
 
@@ -301,7 +318,7 @@ h4
 
   .container
   {
-    display:flex;
+    display: flex;
   }
 
   .wrapper
@@ -309,10 +326,11 @@ h4
     flex-direction: column-reverse;
     height: auto;
   }
+
   .wheater-info-container
-{
-  height: auto;
-  padding: 10px 4px;
-}
+  {
+    height: auto;
+    padding: 10px 4px;
+  }
 }
 </style>
