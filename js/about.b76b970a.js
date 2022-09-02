@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkweatherapp"]=self["webpackChunkweatherapp"]||[]).push([[443],{908:function(a,e,n){n.r(e),n.d(e,{default:function(){return o}});var t=n(252);const r={class:"about"},u=(0,t._)("h1",null,"This is an about page",-1),s=[u];function c(a,e){return(0,t.wg)(),(0,t.iD)("div",r,s)}var i=n(744);const p={},h=(0,i.Z)(p,[["render",c]]);var o=h}}]);
+//# sourceMappingURL=about.b76b970a.js.map
