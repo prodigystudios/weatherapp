@@ -41,7 +41,7 @@ body
     scroll-behavior: smooth;
   }
   #app {
-    font-family: fantasy;
+    font-family:sans-serif;
     letter-spacing: 5px;
   }
 }

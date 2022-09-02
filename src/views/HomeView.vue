@@ -195,7 +195,7 @@ export default {
     }
   },
   created() {
-    if(navigator.geolocation) {
+    if(navigator && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.showPosition)
       }else {
         console.log('cant get position');
@@ -313,8 +313,18 @@ h4
 @media (max-width: 425px)
 {
   .days {
+    display: flex;
+    gap:10px;
+    justify-content: center;
     width: 100%;
     font-size: 15px;
+  }
+  .days h4 {
+    width: 95px;
+    text-align: left;
+  }
+  .days h3{
+    align-self: center;
   }
 }
 
